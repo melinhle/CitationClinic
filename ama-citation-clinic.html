@@ -148,6 +148,18 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
 footer .wrap{padding-block:20px 28px;display:flex;flex-direction:column;gap:6px}
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
 @media (prefers-reduced-motion:no-preference){.card,.hero{animation:in .25s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
+/* reviewer view */
+.rvnote{border:1px solid var(--line);border-left:5px solid var(--gold);background:var(--surface);padding:12px 16px;border-radius:0 10px 10px 0;max-width:70ch}
+.btn.rvn{min-height:44px;padding:8px 14px;font-size:16px}
+.btn.rvn[aria-current]{border-color:var(--ink);background:var(--surface)}
+.rvh{font-size:clamp(22px,4.5vw,30px);font-weight:800;border-top:2px solid var(--ink);padding-top:18px}
+.card h3.sh{font-size:clamp(24px,4.6vw,32px);font-weight:800}
+.card ul.rvl{padding:0;list-style:none}
+.card ul.rvl li{max-width:none}
+.opt.ro,.tile.ro{cursor:default}
+.opt.ro:hover{border-color:var(--line)}
+.opt.ro.right:hover{border-color:var(--good)}
+.tile.ro.decoy{border-style:dashed;border-color:var(--line);color:var(--muted)}
 </style>
 </head>
 <body>
@@ -292,14 +304,19 @@ const M=[
   <p><b>RxFiles</b> charts follow this pattern:</p>
   <div class="apa"><div class="ref">Author(s). Chart name. <i>Online monograph name</i> (edition). Publication date. URL</div></div>
   <p>The guide also covers Health Canada's Drug Product Database, Merck Index, USP-NF, Compounding Today and ClinicalKey. <a href="${GUIDE}/references" target="_blank" rel="noopener">Find your source type</a></p>`},
- {h:'Generative AI in AMA',b:`<p>AMA handles AI tools differently from other sources.</p>
+ {h:'Generative AI in AMA',b:`<p><b>Check first.</b> Your instructor decides whether you may use AI tools and how you should acknowledge them. Look at your course outline or ask.</p>
+  <p>AMA handles AI tools differently from other sources.</p>
   <ul><li>An AI tool <b>cannot be an author</b>.</li><li>AI output does <b>not</b> get a number or a reference list entry.</li><li>You <b>disclose</b> it in your text instead: say what you used it for, then give the tool, version, maker and date in brackets.</li></ul>
   <div class="apa"><div>A first outline of this section was drafted with a chatbot (ChatGPT, model GPT-4, OpenAI, May 17, 2024) and then revised by the author.</div></div>
-  <p>Check your course outline before you use an AI tool. If an AI tool gives you a reference, find and read the real source before you cite it, because AI tools can invent references.</p>
-  <p class="muted">The UM guide does not yet have an AMA page for AI. This slide follows the <i>AMA Manual of Style</i>, sections 5.2.1.1 and 14.5.2.</p>`},
- {h:'Elders and Knowledge Keepers',b:`<p>Standard AMA treats Oral Teachings as a personal communication with no reference list entry. The UM guide recommends citing Elders and Knowledge Keepers the same way as authors, with a reference list entry that records their community:</p>
-  <div class="apa"><div class="ref">Name of person. (Elder, Knowledge Keeper or preferred title), Nation/Community. Treaty Territory. Where they live. Topic of communication. Date Month Year.</div></div>
-  <p>Follow cultural protocols and get permission before you include Traditional Knowledge. <a href="${GUIDE}/IndigenousKnowledge" target="_blank" rel="noopener">Read the protocols in the guide</a></p>`}],
+  <p>If an AI tool gives you a reference, find and read the real source before you cite it, because AI tools can invent references.</p>
+  <p><a href="https://libguides.lib.umanitoba.ca/artificialintelligence/cite" target="_blank" rel="noopener">Citations and disclosure in the UM Libraries AI guide</a></p>
+  <p class="muted">The details on this slide follow the <i>AMA Manual of Style</i>, sections 5.2.1.1 and 14.5.2.</p>`},
+ {h:'Citing Indigenous Knowledge',b:`<p>Standard AMA treats Oral Teachings from Elders and Knowledge Keepers as a personal communication, with no reference list entry. That gives Oral Tradition less standing than other sources.</p>
+  <p>The UM guide recommends something different. Its advice was developed at Ongomiizwin in 2024 by Elder Margaret Lavallee, Elder Charlotte Nolin, Pipe Carrier Nitanis Leary and librarian Margaret Banka: cite Elders and Knowledge Keepers <b>the same way as authors</b>, and give them a reference list entry that records their community.</p>
+  <div class="apa"><span class="cap">In your text</span><div>According to Nolin,<sup>4</sup> not all knowledge that an Elder shares with you may be passed on to others.</div><span class="cap">In your reference list</span><div class="ref">4. Nolin C. (Elder), Metis Nation. Red River Settlement. Residing in Treaty 1. Citing Indigenous Knowledge. 29 April 2024.</div></div>
+  <p>The entry gives the person's name, their role, their Nation or community, their Treaty territory, where they live, the topic, and the date you spoke.</p>
+  <ul><li><b>Ask permission</b> before you include Oral Teachings or Traditional Knowledge in your work.</li><li><b>Ask the Elder or Knowledge Keeper</b> which title and details they want used. If they prefer a traditional name, use it in place of the last name and initial.</li><li><b>Leave out</b> the Treaty territory or place of residence if it does not apply or the person does not want it included.</li></ul>
+  <p><a href="${GUIDE}/IndigenousKnowledge" target="_blank" rel="noopener">Read the protocols in the guide</a></p>`}],
  game:{name:'Pharmacy run: tricky sources',intro:'Rebuild three clinical references, then answer seven questions.',items:[
   {t:'build',q:'A CPS drug monograph.',tiles:['Aricept/Aricept DT.','In: <i>CPS</i>.','Canadian Pharmacists Association.','Updated December 18, 2014.','Accessed September 2, 2022.','https://www.e-therapeutics.ca'],ans:null,why:'Drug name. In: <i>Database title</i>. Publisher. Updated date. Accessed date. URL'},
   {t:'build',q:'An UpToDate Lexidrug monograph.',tiles:['Etanercept.','In: <i>Lexi-Drugs</i>.','UpToDate Inc; 2024.','Updated April 15, 2024.','Accessed April 16, 2024.','http://online.lexi.com'],ans:null,why:'The same pattern as CPS, with the publisher and year before the updated date.'},
@@ -354,8 +371,9 @@ function confetti(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)re
 
 /* ---------- routing ---------- */
 function go(h){if(location.hash==='#'+h)route();else location.hash=h}
-function route(){const h=(location.hash||'#home').slice(1),m=h.match(/^module-(\d)$/);
-  if(m&&M[m[1]-1])V=isOpen(M[m[1]-1])?{name:'mod',m:M[m[1]-1],phase:'learn',i:0}:{name:'locked',m:M[m[1]-1]};
+function route(){const h=(location.hash||'#home').slice(1),m=h.match(/^module-(\d)$/),rv=h.match(/^review(?:-(\d|final))?$/);
+  if(rv)V={name:'rev',m:rv[1]==='final'?FINAL:rv[1]?M[rv[1]-1]:null};
+  else if(m&&M[m[1]-1])V=isOpen(M[m[1]-1])?{name:'mod',m:M[m[1]-1],phase:'learn',i:0}:{name:'locked',m:M[m[1]-1]};
   else if(h==='final')V=isOpen(FINAL)?{name:'mod',m:FINAL,phase:'intro'}:{name:'locked',m:FINAL};
   else if(h==='certificate')V={name:'cert'};
   else V={name:'home'};
@@ -364,7 +382,7 @@ window.addEventListener('hashchange',route);
 
 /* ---------- views ---------- */
 function render(){document.getElementById('pts').textContent=points()+' points';
-  if(V.name==='home')return home();if(V.name==='cert')return cert();if(V.name==='locked')return locked();
+  if(V.name==='rev')return review();if(V.name==='home')return home();if(V.name==='cert')return cert();if(V.name==='locked')return locked();
   if(V.phase==='learn')return lesson();if(V.phase==='intro')return intro();
   if(V.phase==='play')return play();return result()}
 
@@ -487,6 +505,30 @@ function copyText(btn){const el=document.getElementById(btn.dataset.t),text=el.v
   const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1500)};
   const fb=()=>{if(el.select)el.select();else{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}btn.textContent='Selected. Now press Ctrl+C or Cmd+C'};
   try{navigator.clipboard.writeText(text).then(ok,fb)}catch(e){fb()}}
+
+/* ---------- reviewer view: #review, or type the word "review" on the page ---------- */
+function review(){const m=V.m,all=[...M,FINAL],key=x=>x.id==='final'?'final':x.n,lab=x=>x.id==='final'?'Final rounds':'Module '+x.n;
+  const nav=`<nav class="row" aria-label="Reviewer sections"><a class="btn ghost rvn" href="#review" ${m?'':'aria-current="page"'}>Overview</a>${all.map(x=>`<a class="btn ghost rvn" href="#review-${key(x)}" ${m&&m.id===x.id?'aria-current="page"':''}>${lab(x)}</a>`).join('')}<a class="btn ghost rvn" href="#home">Student view</a></nav>`;
+  const note='<div class="rvnote" role="note"><b>Reviewer view.</b> Each section is shown on one page with the answers visible. Nothing here is scored or saved, and it does not unlock modules or the certificate.</div>';
+  if(!m){app.innerHTML=`<section class="hero"><span class="eyebrow">For instructors and reviewers</span><h1 tabindex="-1" id="vh" style="font-size:clamp(30px,6vw,44px)">Review a section</h1><p>Pick a section to read its slides and questions without playing the games.</p></section>${note}
+   <ol class="mods">${all.map(x=>`<li><a class="it ${x.id==='final'?'final':''}" href="#review-${key(x)}"><span class="num">${x.n}</span><span><h3>${x.title}</h3><span class="desc">${x.desc}</span></span><span class="status">${x.slides?x.slides.length+' slides · ':''}${x.game.items.length} questions</span></a></li>`).join('')}</ol>
+   <div class="row"><a class="btn ghost" href="#home">Back to the student view</a></div>`;focusH();return}
+  const g=m.game,n=g.items.length,kind={sort:'Cite it or skip it',mcq:'Multiple choice',build:'Build in order'};
+  const slides=(m.slides||[]).map((s,k)=>`<article class="card"><span class="eyebrow">Slide ${k+1} of ${m.slides.length}</span><h3 class="sh">${s.h}</h3>${s.b}
+   ${k===m.slides.length-1&&m.watch?`<a class="watch" href="${m.watch.url}" target="_blank" rel="noopener"><span class="play"></span><span><b>Watch: ${m.watch.title}</b><small>${m.watch.by} · about 2 minutes · opens in a new tab</small></span></a>`:''}</article>`).join('');
+  const ans=it=>{
+   if(it.t==='sort')return `<ul class="opts two rvl">${[true,false].map(v=>`<li class="opt ro ${v===it.a?'right':''}">${v?'Cite it':'No citation needed'} ${v===it.a?'<span class="tag">Correct answer</span>':''}</li>`).join('')}</ul>`;
+   if(it.t==='mcq')return `<ul class="opts rvl">${it.opts.map((o,k)=>`<li class="opt ro ${k===it.a?'right':''}"><span>${o}</span>${k===it.a?'<span class="tag">Correct answer</span>':''}</li>`).join('')}</ul>`;
+   const dec=it.tiles.filter(t=>!it.ans.includes(t));
+   return `<span class="eyebrow">Correct order</span><div class="line right">${it.ans.map(t=>`<span class="tile ro">${t}</span>`).join('')}</div>${dec.length?`<span class="eyebrow">Decoy pieces</span><div class="pool">${dec.map(t=>`<span class="tile ro decoy">${t}</span>`).join('')}</div>`:''}`};
+  const qs=g.items.map((it,k)=>`<article class="card"><span class="eyebrow">Question ${k+1} of ${n} · ${kind[it.t]}</span><div class="q">${it.q}</div>${ans(it)}<div class="fb"><b>Explanation shown after a correct answer</b><span>${it.why}</span></div></article>`).join('');
+  app.innerHTML=`${nav}<section class="hero"><span class="eyebrow">Reviewer view · ${lab(m)}${m.mins?' · about '+m.mins+' min for students':''}</span><h1 tabindex="-1" id="vh" style="font-size:clamp(30px,6vw,44px)">${m.title}</h1><p>${m.desc}</p></section>${note}
+  ${slides?`<h2 class="rvh">Lesson slides</h2>${slides}`:''}
+  <h2 class="rvh">${m.id==='final'?'Questions':'Game: '+g.name}</h2>
+  <p>${g.intro} <span class="muted">Students need ${need(m)} of ${n} to pass. They see multiple-choice options and build pieces in a shuffled order, and a wrong answer does not reveal the correct one.</span></p>
+  ${qs}${nav}`;focusH()}
+let typed='';
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||e.key.length!==1||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName||''))return;typed=(typed+e.key.toLowerCase()).slice(-6);if(typed==='review'){typed='';go('review')}});
 
 function focusH(){const h=document.getElementById('vh');if(h)h.focus({preventScroll:true})}
 

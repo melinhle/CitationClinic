@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>APA Citation Clinic</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: UM-blue band on top, one reading column; lessons are short cards, APA examples are set as manuscript specimens (serif, hanging indent). Blue leads, gold is a small accent. */
+:root{
+  --bg:#ffffff; --surface:#f1f5fa; --ink:#14233b; --muted:#536379; --line:#d7dfea;
+  --band:#385e9d; --band-ink:#ffffff; --pri:#385e9d; --on-pri:#ffffff; --gold:#f2a900; --hl:#cdeefb;
+  --blue:#385e9d; --sky:#00a3e0; --paper:#ffffff; --paper-ink:#14233b;
+  --good:#1f7a4d; --good-bg:#e6f4ec; --bad:#b3261e; --bad-bg:#fbeae8;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --serif:"Source Serif 4","Times New Roman",Times,serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e1726; --surface:#172438; --ink:#eaf0f8; --muted:#a7b4c7; --line:#2c3c56;
+  --band:#1f3a66; --band-ink:#ffffff; --pri:#4cc3f0; --on-pri:#06202e; --gold:#f2a900; --hl:#0d4f6e;
+  --blue:#9dbbee; --sky:#4cc3f0; --paper:#111d30; --paper-ink:#eaf0f8;
+  --good:#6fd3a0; --good-bg:#17332a; --bad:#f39088; --bad-bg:#3d1c19; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0e1726; --surface:#172438; --ink:#eaf0f8; --muted:#a7b4c7; --line:#2c3c56;
+  --band:#1f3a66; --band-ink:#ffffff; --pri:#4cc3f0; --on-pri:#06202e; --gold:#f2a900; --hl:#0d4f6e;
+  --blue:#9dbbee; --sky:#4cc3f0; --paper:#111d30; --paper-ink:#eaf0f8;
+  --good:#6fd3a0; --good-bg:#17332a; --bad:#f39088; --bad-bg:#3d1c19; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+
+/* band */
+.band{background:var(--band);color:var(--band-ink);border-bottom:5px solid var(--sky)}
+.band .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:14px}
+.brand{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px;color:var(--band-ink);text-decoration:none}
+.brand small{font-size:12px;letter-spacing:.09em;text-transform:uppercase;opacity:.85}
+.brand b{font-family:var(--display);font-weight:800;font-size:22px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{font:600 14px var(--body);color:var(--band-ink);background:transparent;border:1.5px solid var(--band-ink);border-radius:999px;padding:6px 12px;font-variant-numeric:tabular-nums}
+button.chip{cursor:pointer}
+button.chip[aria-pressed="true"]{background:var(--band-ink);border-color:var(--band-ink);color:var(--band)}
+
+main.wrap{padding-block:28px 48px;display:flex;flex-direction:column;gap:24px}
+.btn{font:700 17px var(--body);border-radius:8px;padding:12px 20px;min-height:48px;cursor:pointer;border:2px solid var(--pri);background:var(--pri);color:var(--on-pri);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.muted{color:var(--muted)}
+.eyebrow{font:700 13px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* home */
+.hero{display:flex;flex-direction:column;gap:14px}
+.hero h1{font-size:clamp(34px,7vw,56px);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--hl) 62%)}
+.hero p{max-width:60ch;font-size:19px}
+.rx{font-family:var(--serif);background:var(--paper);color:var(--paper-ink);border:1px solid var(--line);border-left:5px solid var(--sky);padding:12px 16px;max-width:60ch}
+.mods{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:2px solid var(--ink)}
+.mods .it{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.mods a.it:hover{background:var(--surface)}
+.mods .it.locked h3,.mods .it.locked .num{color:var(--muted)}
+.mods .num{font:800 34px var(--display);color:var(--blue);font-variant-numeric:tabular-nums}
+.mods h3{font-size:21px;font-weight:700}
+.mods .desc{color:var(--muted);font-size:16px}
+.status{font:700 13px var(--body);letter-spacing:.04em;border-radius:999px;padding:4px 10px;border:1.5px solid var(--line);color:var(--muted);white-space:nowrap}
+.status.done{border-color:var(--good);color:var(--good);background:var(--good-bg)}
+.mods .it.final .num{color:var(--ink)}
+@media (max-width:520px){.mods .it{grid-template-columns:40px minmax(0,1fr)}.mods .status{grid-column:2;justify-self:start}.mods .num{font-size:26px}}
+
+/* lesson */
+.crumb{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.dots{display:flex;gap:6px}
+.dots i{width:26px;height:6px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--sky)}
+.card{background:var(--surface);border-radius:14px;padding:clamp(18px,4vw,30px);display:flex;flex-direction:column;gap:16px}
+.card h2{font-size:clamp(26px,5vw,36px);font-weight:800}
+.card ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.card p,.card li{max-width:65ch}
+.apa{font-family:var(--serif);font-size:17px;line-height:1.6;background:var(--paper);color:var(--paper-ink);border:1px solid var(--line);padding:14px 18px;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:10px}
+.apa .ref{padding-left:2.2em;text-indent:-2.2em}
+.apa .cap{font:700 12px var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.apa .ctr{text-align:center;font-weight:600}
+.apa .blockq{padding-left:2.2em}
+mark{background:var(--hl);color:var(--ink);padding:0 3px;border-radius:3px}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px;background:var(--paper);color:var(--paper-ink)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase}
+td.s{font-family:var(--serif)}
+.el{border-bottom:3px solid var(--line)}
+.el.who{border-color:var(--blue)}.el.when{border-color:var(--gold)}.el.what{border-color:var(--sky)}.el.where{border-color:var(--good)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font:600 14px var(--body)}
+.legend span{border-bottom:3px solid var(--line);padding-bottom:1px}
+.watch{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:center;background:var(--band);color:var(--band-ink);border-radius:10px;padding:14px 16px;text-decoration:none}
+.watch .play{width:52px;height:52px;border-radius:50%;background:var(--band-ink);display:grid;place-items:center}
+.watch .play::after{content:"";border-left:16px solid var(--band);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.watch b{display:block;font-family:var(--display);font-size:18px}
+.watch small{opacity:.85;font-size:14px}
+
+/* game */
+.q{font-size:20px;font-weight:600;max-width:60ch}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts.two{flex-direction:row;flex-wrap:wrap}
+.opts.two .opt{flex:1 1 200px;justify-content:center;font-weight:700;font-family:var(--body)}
+.opt{font:400 17px var(--serif);text-align:left;background:var(--paper);color:var(--paper-ink);border:2px solid var(--line);border-radius:10px;padding:12px 16px;min-height:52px;cursor:pointer;display:flex;gap:10px;align-items:center;overflow-wrap:anywhere}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-bg);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg);color:var(--ink)}
+.tag{font:700 12px var(--body);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.right .tag{color:var(--good)}.wrong .tag{color:var(--bad)}
+.line{min-height:64px;background:var(--paper);border:2px dashed var(--line);border-radius:10px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.line.right{border:2px solid var(--good);background:var(--good-bg)}.line.wrong{border:2px solid var(--bad);background:var(--bad-bg)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:48px}
+.tile{font:400 17px var(--serif);background:var(--paper);color:var(--paper-ink);border:2px solid var(--blue);border-radius:8px;padding:8px 12px;min-height:44px;cursor:pointer;text-align:left;max-width:100%;overflow-wrap:anywhere}
+.tile:disabled{cursor:default}
+.fb{border-left:5px solid var(--good);background:var(--good-bg);padding:12px 16px;border-radius:0 10px 10px 0;display:flex;flex-direction:column;gap:6px}
+.fb.no{border-color:var(--bad);background:var(--bad-bg)}
+.fb b{font-family:var(--display);font-size:19px}
+.fb .apa{border:0;background:transparent;padding:0;color:var(--ink)}
+.meter{display:flex;gap:4px;flex-wrap:wrap}
+.meter i{width:18px;height:8px;border-radius:4px;background:var(--line)}
+.meter i.y{background:var(--good)}.meter i.n{background:var(--bad)}.meter i.c{background:var(--gold)}
+.big{font:800 clamp(48px,12vw,84px) var(--display);font-variant-numeric:tabular-nums;line-height:1}
+
+/* certificate */
+.cert{background:var(--paper);color:var(--paper-ink);border:3px solid var(--band);outline:3px solid var(--gold);outline-offset:-10px;padding:clamp(28px,6vw,52px);text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.cert .who{font:800 clamp(28px,6vw,44px) var(--display);border-bottom:3px solid var(--sky);padding:0 16px 6px;overflow-wrap:anywhere;max-width:100%}
+.cert .code{font:700 20px var(--body);font-variant-numeric:tabular-nums;letter-spacing:.05em}
+.cert .apa-line{font-family:var(--serif);font-size:15px;color:var(--muted);overflow-wrap:anywhere}
+label{font-weight:600}
+textarea{font:400 16px var(--body);width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--paper-ink);resize:vertical}
+.addr{font:600 18px var(--body);background:var(--paper);color:var(--paper-ink);border:2px solid var(--line);border-radius:8px;padding:9px 12px;user-select:all;overflow-wrap:anywhere}
+.step{font:800 15px var(--display);background:var(--pri);color:var(--on-pri);border-radius:50%;width:30px;height:30px;display:inline-grid;place-items:center;margin-right:8px;font-variant-numeric:tabular-nums}
+.card h3{font-size:22px}
+.fields{display:flex;flex-wrap:wrap;gap:12px 20px}
+.fields label{display:flex;flex-direction:column;gap:4px;flex:1 1 240px;min-width:0}
+input[type=text]{font:400 17px var(--body);padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--paper-ink);min-width:0;flex:1 1 220px;max-width:360px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
+footer .wrap{padding-block:20px 28px;display:flex;flex-direction:column;gap:6px}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+@media (prefers-reduced-motion:no-preference){.card,.hero{animation:in .25s ease-out}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <a class="brand" href="#home"><small>University of Manitoba Libraries · Health Sciences</small><b>APA Citation Clinic</b></a>
+    <div class="tools">
+      <span class="chip" id="pts" aria-live="polite">0 points</span>
+      <button class="chip" id="snd" type="button" aria-pressed="false">Sound off</button>
+    </div>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<footer><div class="wrap">
+  <span>Created by Mê-Linh Lê, drawing on content from <a href="https://libguides.lib.umanitoba.ca/apastyle" target="_blank" rel="noopener">How to cite using APA in the Health Sciences</a>, University of Manitoba Libraries, and the <i>Publication Manual of the American Psychological Association</i> (7th ed.).</span>
+  <span>AI disclosure: the text, quiz questions and code were generated with Claude Fable 5.2 (Anthropic) in November 2026, directed and reviewed by the author.</span>
+  <span>© 2026 Mê-Linh Lê. Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>: free to share and adapt for non-commercial use, with credit.</span>
+  <span>Unless a link is given, the example sentences, authors and dates are fictitious, as they are in the guide.</span>
+  <span>Questions about APA? NJM Health Sciences Library, 200 level, Brodie Centre · healthlibrary@umanitoba.ca</span>
+</div></footer>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+const GUIDE='https://libguides.lib.umanitoba.ca/apastyle';
+const M=[
+{id:'m1',n:1,title:'Why cite?',desc:'What a citation does, what counts as plagiarism, and what you can leave uncited.',mins:6,
+ slides:[
+ {h:'A citation does three jobs',b:`<p>Academic writing builds on what other people have already worked out. Each time you cite, you do three things at once:</p>
+  <ul><li><b>Document.</b> You show the evidence behind your claim.</li><li><b>Acknowledge.</b> You give credit to the person whose idea it was.</li><li><b>Direct.</b> You show your reader where to find more.</li></ul>
+  <p>In health care, people act on what is written down. A reader should be able to trace a dose, a statistic or a recommendation back to its source.</p>`},
+ {h:'Why APA?',b:`<p>APA Style is the set of rules in the <i>Publication Manual of the American Psychological Association</i> (7th ed.). Many health sciences courses use it. When everyone formats sources the same way, a reader always knows where to look.</p>
+  <p>APA uses an <b>author-date</b> system. Every source shows up twice:</p>
+  <div class="apa"><span class="cap">1. A short citation in your text</span><div>Type 1 diabetes is a known risk for cardiovascular disease <mark>(Hajjar &amp; Kaczynski, 2020)</mark>.</div><span class="cap">2. A full entry in your reference list</span><div class="ref">Hajjar, L., &amp; Kaczynski, M. (2020). Title of the article. <i>Name of the Journal, 12</i>(3), 45–58.</div></div>
+  <p class="muted">Always check your course outline. Some instructors add their own requirements.</p>`},
+ {h:'Plagiarism can be accidental',b:`<p>Plagiarism is presenting someone else's words, ideas or images as your own. It counts whether you meant to do it or not. At UM, all information or data in an assignment should be cited.</p>
+  <p>You do <b>not</b> need a citation for:</p>
+  <ul><li>your own original analysis of the information you present</li><li>the results of an experiment you ran yourself</li><li>some common knowledge</li><li>your personal or lived experience</li></ul>
+  <p>If you are not sure, cite it.</p>
+  <p><a href="https://umanitoba.ca/student-supports/academic-supports/academic-integrity" target="_blank" rel="noopener">UM Academic Integrity</a> explains the rules and where to get help.</p>`},
+ {h:'Who you cite matters too',b:`<p>Research across disciplines shows that women are cited less often than men (Rubin, 2022), and Black and Hispanic scientists are cited less often than white scientists (Liu et al., 2023).</p>
+  <p><b>Citation justice</b> means deliberately looking for strong work by authors who are under-cited. It widens the evidence you draw on and gives credit where it has been missing.</p>
+  <p><a href="${GUIDE}/when" target="_blank" rel="noopener">Read more about citation justice in the guide</a></p>`}],
+ game:{name:'Triage: cite it or skip it?',intro:'Ten things a student might put in a paper. Decide whether each one needs a citation.',items:[
+  {t:'sort',q:'You put a finding about hand hygiene compliance from a journal article into your own words.',a:true,why:'A paraphrase still needs a citation. The wording is yours, the idea is not.'},
+  {t:'sort',q:'You report the blood pressure readings you collected in your own lab experiment.',a:false,why:'These are the results of your own experiment, so there is no one else to credit.'},
+  {t:'sort',q:'You copy one sentence word for word from a Health Canada webpage.',a:true,why:'A direct quotation needs quotation marks, a citation, and the place you found it, such as a paragraph number.'},
+  {t:'sort',q:'You write that the heart pumps blood around the body.',a:false,why:'This is common knowledge. When you are unsure whether something is common knowledge, cite it.'},
+  {t:'sort',q:'You add a diagram of the nephron from a website to your poster.',a:true,why:'Images count. Plagiarism covers words, ideas and images.'},
+  {t:'sort',q:'You describe what you noticed while volunteering at a personal care home.',a:false,why:'This is your own lived experience.'},
+  {t:'sort',q:'You ask ChatGPT to explain a concept and use its explanation in your paper.',a:true,why:'Generative AI output is cited, with the developer as the author, for example (OpenAI, 2024). Check first whether your instructor allows AI tools.'},
+  {t:'sort',q:'You include a statistic on diabetes prevalence from a Statistics Canada table.',a:true,why:'Data and statistics always need a source so a reader can check the numbers.'},
+  {t:'sort',q:'You summarize the main points from lecture slides your instructor posted in UM Learn.',a:true,why:'Lectures and slides are sources too. The guide has reference templates for both.'},
+  {t:'sort',q:'After comparing two studies you have already cited, you write your own conclusion about which is stronger.',a:false,why:'Your own original analysis does not need a citation. The two studies you compared still do.'}]}},
+
+{id:'m2',n:2,title:'Citing in your text',desc:'Parenthetical and narrative citations, paraphrases, quotations and page numbers.',mins:7,
+ slides:[
+ {h:'Author and year, every time',b:`<p>An in-text citation has two core parts: the <b>author's surname</b> and the <b>year</b>. You can place them in two ways.</p>
+  <div class="apa"><span class="cap">Parenthetical: both inside the brackets</span><div>Research shows decreased mortality due to renal failure in the last 10 years <mark>(Banner et al., 2019)</mark>.</div><span class="cap">Narrative: the author is part of your sentence</span><div>According to <mark>Singh (2020)</mark>, several longitudinal studies have evaluated the effects of type 1 diabetes and cardiovascular disease.</div></div>
+  <p>However many times you cite a source in your text, it appears in the reference list once.</p>`},
+ {h:'Paraphrase first',b:`<p>Paraphrasing means restating an idea in your own words. It is the preferred way to use sources in APA because it shows you understood them.</p>
+  <ul><li>A paraphrase needs the author and year.</li><li>A page number is optional. Add one if it helps a reader find the passage in a long work such as a book.</li></ul>
+  <div class="apa"><div>According to Fontaine (2024), many variants of the raw food diet exist and there is no one definition.</div></div>`},
+ {h:'Quoting word for word',b:`<p>Use direct quotations sparingly. When you do quote, add double quotation marks and say exactly where the words are.</p>
+  <div class="tblwrap"><table><tr><th>Where the quote is</th><th>Write</th></tr>
+  <tr><td>One page</td><td class="s">(Tahir et al., 2018, p. 13)</td></tr>
+  <tr><td>Several pages</td><td class="s">(Sanchez-Duarte, 2015, pp. 46–47)</td></tr>
+  <tr><td>A webpage with no page numbers</td><td class="s">(Dieticians of Canada, 2021, para. 11)</td></tr></table></div>
+  <p>The citation goes after the closing quotation mark and before the period:</p>
+  <div class="apa"><div>"The potential outcomes from adhering to a raw diet are still being studied" (Dieticians of Canada, 2021, para. 11).</div></div>`},
+ {h:'Forty words or more',b:`<p>A quotation of 40 words or more becomes a <b>block quotation</b>. Start it on a new line, indent the whole block half an inch, and drop the quotation marks. The citation comes after the final period.</p>
+  <div class="apa"><div>It is important to keep in mind:</div><div class="blockq">Raw food diets are extreme dietary regiments that have not been investigated extensively. For those that have been investigated the benefits are still considered controversial. There is also little information about the effect of consuming a raw vegan diet on the immune system. (Tahir et al., 2018, pp. 92–93)</div></div>`}],
+ watch:{title:'APA 7th in Minutes: In-Text Citations',by:'Humber Libraries',url:'https://library.humber.ca/tutorials/apa-7th-minutes-text-citations'},
+ game:{name:'Diagnosis: pick the healthy citation',intro:'Each case has one correctly formatted answer. Find it.',items:[
+  {t:'mcq',q:'You paraphrase an idea from a 2020 work by Singh. Which citation ends your sentence?',opts:['(Singh, 2020)','(Singh 2020)','(Singh, S., 2020)'],a:0,why:'Surname, comma, year. No initials in the text.'},
+  {t:'mcq',q:'Which sentence uses a narrative citation correctly?',opts:['According to Singh (2020), hypertension starts in childhood.','According to (Singh, 2020), hypertension starts in childhood.','According to Singh, 2020, hypertension starts in childhood.'],a:0,why:'In a narrative citation the name is part of your sentence and only the year goes in brackets.'},
+  {t:'mcq',q:'You quote a sentence from page 13 of Tahir et al. (2018). Which citation is complete?',opts:['(Tahir et al., 2018, p. 13)','(Tahir et al., 2018)','(Tahir et al., p. 13, 2018)'],a:0,why:'A direct quotation always needs a location, and it comes after the year.'},
+  {t:'mcq',q:'Your quotation starts on page 46 and ends on page 47. How do you show that?',opts:['pp. 46–47','p. 46–47','pg. 46-47'],a:0,why:'Use "p." for one page and "pp." for a range.'},
+  {t:'mcq',q:'You quote the fourth paragraph of a Health Canada webpage that has no page numbers.',opts:['(Health Canada, 2023, para. 4)','(Health Canada, 2023)','(Health Canada, 2023, p. n/a)'],a:0,why:'With no page numbers, point to the paragraph with "para."'},
+  {t:'mcq',q:'Where does the period go after a short quotation?',opts:['"…due to systemic racism" (Barter, 2024, p. 18).','"…due to systemic racism." (Barter, 2024, p. 18)','"…due to systemic racism." (Barter, 2024, p. 18).'],a:0,why:'The citation belongs to the sentence, so the period comes after the closing bracket.'},
+  {t:'mcq',q:'You cite the same article five times in your paper. How many times does it appear in the reference list?',opts:['Once','Five times','Only if you quoted from it'],a:0,why:'Each source gets one entry in the reference list, however often you cite it.'},
+  {t:'mcq',q:'Which is the preferred way to bring a source into your writing in APA style?',opts:['Paraphrasing it in your own words','Quoting it word for word','Setting it as a block quotation'],a:0,why:'Paraphrasing shows you understood the source. Save direct quotations for wording that really matters.'},
+  {t:'mcq',q:'What goes around a short direct quotation?',opts:['Double quotation marks','Single quotation marks','Italics, with no quotation marks'],a:0,why:'Use double quotation marks, then the citation with a page or paragraph number.'},
+  {t:'mcq',q:'The passage you want to quote is 52 words long. What do you do?',opts:['Set it as a block quotation: new line, indented, no quotation marks','Put it in quotation marks like any other quote','Leave out the citation because it is too long to quote'],a:0,why:'Forty words or more becomes a block quotation. Consider paraphrasing instead.'}]}},
+
+{id:'m3',n:3,title:'Authors and special cases',desc:'Two authors, et al., organizations, missing dates, AI tools and Indigenous knowledge.',mins:7,
+ slides:[
+ {h:'Count the authors',b:`<p>The number of authors changes the citation. Use surnames only.</p>
+  <div class="tblwrap"><table><tr><th>Authors</th><th>Parenthetical</th><th>Narrative</th></tr>
+  <tr><td>One</td><td class="s">(Polak, 2022)</td><td class="s">Polak (2022)</td></tr>
+  <tr><td>Two</td><td class="s">(Haddad <mark>&amp;</mark> Currie, 2024)</td><td class="s">Haddad <mark>and</mark> Currie (2024)</td></tr>
+  <tr><td>Three or more</td><td class="s">(Denman et al., 2018)</td><td class="s">Denman et al. (2018)</td></tr></table></div>
+  <p>Inside brackets use <b>&amp;</b>. In your sentence write <b>and</b>. With three or more authors, give the first surname and "et al." from the very first citation.</p>`},
+ {h:'Organizations and more than one source',b:`<p>An author can be a group, such as a government agency or professional body.</p>
+  <div class="apa"><div>(Health Canada, 2023)</div><span class="cap">Introducing an abbreviation</span><div>First time: (American Psychological Association [APA], 2019)<br>After that: (APA, 2019)</div><span class="cap">Two sources for one point</span><div>With Type 1 diabetes, hypertension starts in childhood (Hajjar &amp; Kaczynski, 2020; Singh, 2020).</div></div>
+  <p>Put several sources in alphabetical order and separate them with semicolons.</p>`},
+ {h:'When something is missing',b:`<p>Do not leave a gap, and do not write "Anonymous" unless the work itself is signed that way.</p>
+  <div class="tblwrap"><table><tr><th>Missing</th><th>In your text</th></tr>
+  <tr><td>Date</td><td class="s">(Canadian Nurses Association, n.d.)</td></tr>
+  <tr><td>Author</td><td class="s">(Title of the work, 2024)</td></tr>
+  <tr><td>Author and date</td><td class="s">(Title of the work, n.d.)</td></tr></table></div>
+  <p>"n.d." stands for "no date". <a href="${GUIDE}/formatting" target="_blank" rel="noopener">See the full table of missing information</a></p>`},
+ {h:'AI tools and Indigenous knowledge',b:`<p><b>Generative AI.</b> Cite the developer as the author and the year of the version you used: (OpenAI, 2024). Check whether your instructor allows AI tools before you use one.</p>
+  <p><b>Elders and Knowledge Keepers.</b> Standard APA treats Oral Teachings as a personal communication with no reference list entry. The UM guide, developed with Elders and a Pipe Carrier at Ongomiizwin, recommends citing Elders and Knowledge Keepers the same way as authors, with a reference list entry:</p>
+  <div class="apa"><div>According to Lavallee (2024), not all knowledge that an Elder shares with you may be passed on to others.</div></div>
+  <p>Follow cultural protocols and get permission before you include Traditional Knowledge. <a href="${GUIDE}/cite/indigenousknowledge" target="_blank" rel="noopener">Read the protocols in the guide</a></p>`}],
+ game:{name:'Treatment: build the citation',intro:'Tap the pieces in order to assemble each citation. Some pieces are decoys, and two questions are multiple choice.',items:[
+  {t:'build',q:'A 2018 article by Denman and two co-authors. Build the parenthetical citation.',tiles:['(Denman','et al.,','2018)','& Okafor,','and'],ans:['(Denman','et al.,','2018)'],why:'Three or more authors: first surname plus "et al."'},
+  {t:'build',q:'Haddad and Currie published in 2024. Build a narrative citation to start your sentence.',tiles:['Haddad','and','Currie','(2024)','&','et al.'],ans:['Haddad','and','Currie','(2024)'],why:'In a narrative citation, write "and" between two authors.'},
+  {t:'build',q:'Same source, this time as a parenthetical citation.',tiles:['(Haddad','&','Currie,','2024)','and','et al.,'],ans:['(Haddad','&','Currie,','2024)'],why:'Inside brackets, two authors are joined with an ampersand.'},
+  {t:'build',q:'You quote paragraph 4 of a 2023 Health Canada webpage.',tiles:['(Health Canada,','2023,','para. 4)','p. 4)','n.d.,'],ans:['(Health Canada,','2023,','para. 4)'],why:'Group author, year, then the paragraph number because a webpage has no pages.'},
+  {t:'build',q:'Two sources support your sentence: Singh (2020) and Hajjar and Kaczynski (2020). Combine them in one set of brackets.',tiles:['(Hajjar & Kaczynski, 2020;','Singh, 2020)','(Singh, 2020;','Hajjar & Kaczynski, 2020)'],ans:['(Hajjar & Kaczynski, 2020;','Singh, 2020)'],why:'Alphabetical order by first author, separated by a semicolon.'},
+  {t:'build',q:'The 2018 article by Denman and two co-authors again. Build a narrative citation to start your sentence.',tiles:['Denman','et al.','(2018)','and colleagues','& others'],ans:['Denman','et al.','(2018)'],why:'"et al." is used in narrative citations too, and only the year goes in brackets.'},
+  {t:'mcq',q:'You have already introduced the abbreviation APA in an earlier citation. How do you cite the American Psychological Association (2019) from now on?',opts:['(APA, 2019)','(American Psychological Association [APA], 2019)','(A.P.A., 2019)'],a:0,why:'Once the abbreviation is introduced, use it on its own.'},
+  {t:'mcq',q:'A webpage names no person or organization as its author. What goes in the author position of your citation?',opts:['The title of the work','Anonymous','Nothing. Leave it blank'],a:0,why:'Move the title into the author position. Use "Anonymous" only if the work is signed that way.'},
+  {t:'build',q:'You used ChatGPT (2024 version), and your instructor allows it. Build the parenthetical citation.',tiles:['(OpenAI,','2024)','(ChatGPT,','n.d.)'],ans:['(OpenAI,','2024)'],why:'The developer is the author, with the year of the version you used.'},
+  {t:'build',q:'A Canadian Nurses Association webpage shows no date anywhere.',tiles:['(Canadian Nurses Association,','n.d.)','no date)','2026)'],ans:['(Canadian Nurses Association,','n.d.)'],why:'Write "n.d." in place of the year. Do not guess a date.'}]}},
+
+{id:'m4',n:4,title:'The reference list',desc:'The four elements of a reference, the page layout, and common health sciences sources.',mins:9,
+ slides:[
+ {h:'Every reference answers four questions',b:`<div class="legend"><span class="el who">Who wrote it?</span><span class="el when">When?</span><span class="el what">What is it called?</span><span class="el where">Where can I find it?</span></div>
+  <div class="apa"><div class="ref"><span class="el who">Lindsay, S., Ahmed, H., Tomas, V., &amp; Vijayakumar, A.</span> <span class="el when">(2023).</span> <span class="el what">Exploring the lived experiences of ethnic minority youth with disabilities: A systematic review and meta synthesis of qualitative data.</span> <span class="el where"><i>Disability and Rehabilitation, 45</i>(4), 588–601. https://doi.org/10.1080/09638288.2022.2040614</span></div></div>
+  <p>Author, date, title, source. The order stays the same for nearly every kind of source.</p>
+  <ul><li>Authors: surname first, then initials. Put <b>&amp;</b> before the last author. List up to 20.</li><li>If the article has a DOI, include it. There is never a period after a DOI or URL.</li></ul>`},
+ {h:'Setting up the page',b:`<div class="apa"><div class="ctr">References</div><div class="ref">Bagheri, S. C. (Ed.). (2014). <i>Clinical review of oral and maxillofacial surgery: A case-based approach</i> (2nd ed.). Mosby Elsevier.</div><div class="ref">Hall, J. B., &amp; Schmidt, G. A. (2015). <i>Principles of critical care</i> (4th ed.). McGraw-Hill Education.</div><div class="ref">McGowan, S. (2020, July 20). U of T develops LGBTQ+ focused health curriculum for medical residents. <i>University Affairs</i>. https://universityaffairs.ca/news/news-article/u-of-t-develops-lgbtq-focused-health-curriculum-for-medical-residents/</div></div>
+  <ul><li>Start on a <b>new page</b> with the title <b>References</b>, bold and centred.</li><li><b>Alphabetical order</b> by the first author's surname.</li><li><b>Hanging indent</b>: the first line of each entry starts at the margin and the lines after it are indented half an inch.</li><li><b>Double-spaced</b>, with no extra space between entries.</li></ul>`},
+ {h:'Capitals and italics',b:`<div class="tblwrap"><table><tr><th>Part</th><th>Style</th><th>Example</th></tr>
+  <tr><td>Article title</td><td>Sentence case, not italic</td><td class="s">Teaching medicine with the help of "Dr. House."</td></tr>
+  <tr><td>Journal name and volume</td><td>Title Case, italic</td><td class="s"><i>Disability and Rehabilitation, 45</i></td></tr>
+  <tr><td>Book or webpage title</td><td>Sentence case, italic</td><td class="s"><i>The top 10 causes of death</i></td></tr></table></div>
+  <p><b>Sentence case</b> capitalizes only the first word, the first word after a colon, and proper nouns. <b>Title Case</b> capitalizes every major word.</p>`},
+ {h:'Sources you will meet in health sciences',b:`<div class="apa"><span class="cap">Webpage by an organization</span><div class="ref">World Health Organization. (2018, May 24). <i>The top 10 causes of death</i>. https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death</div><span class="cap">UpToDate topic</span><div class="ref">Bordeaux, B. (2023). Benefits and risks of caffeine and caffeinated beverages. <i>UpToDate</i>. Retrieved April 16, 2024, from https://www.uptodate.com/contents/benefits-and-risks-of-caffeine-and-caffeinated-beverages</div></div>
+  <p>UpToDate gets a <b>retrieval date</b> because its topics are updated over time and old versions are not archived.</p>
+  <p>The guide has templates for CPS, Lexidrug, Cochrane reviews, ClinicalKey and more. <a href="${GUIDE}/referencelist" target="_blank" rel="noopener">Find your source type</a></p>`},
+ {h:'Citation generators: generate, then check',b:`<p>PubMed's Cite button, ZoteroBib (zbib.org) and generative AI tools can draft a reference in seconds. Treat what they give you as a <b>first draft</b>. You are responsible for what you hand in.</p>
+  <div class="apa"><span class="cap">What a generator gave</span><div class="ref">Lindsay, S., Ahmed, H., Tomas, V., &amp; Vijayakumar, A. (2023). <mark>Exploring the Lived Experiences of Ethnic Minority Youth with Disabilities: A Systematic Review and Meta Synthesis of Qualitative Data</mark>. <i>Disability and Rehabilitation, 45</i>(4), 588–601.</div><span class="cap">After checking</span><div class="ref">Lindsay, S., Ahmed, H., Tomas, V., &amp; Vijayakumar, A. (2023). Exploring the lived experiences of ethnic minority youth with disabilities: A systematic review and meta synthesis of qualitative data. <i>Disability and Rehabilitation, 45</i>(4), 588–601. <mark>https://doi.org/10.1080/09638288.2022.2040614</mark></div></div>
+  <p>Check every generated reference for:</p>
+  <ul><li><b>Capitalization.</b> This is the most common error. Generators often copy the title as it was published, in Title Case. APA wants sentence case for article, book and webpage titles.</li><li><b>Missing pieces.</b> Authors, dates and DOIs are often left out or wrong, especially for webpages.</li><li><b>Italics.</b> They can be lost when you copy and paste.</li><li><b>Whether the source exists.</b> Generative AI can invent a reference that looks perfect. Find the source and open it before you cite it.</li></ul>
+  <p class="muted">Citation managers such as Zotero, EndNote and Mendeley can format references for you, and they need the same checking. UM librarians support all three.</p>`}],
+ watch:{title:'APA 7th in Minutes: Scholarly Journal Articles',by:'Humber Libraries',url:'https://library.humber.ca/tutorials/apa-7th-minutes-scholarly-journal-articles'},
+ game:{name:'Reference rescue',intro:'These references fell apart. Put the pieces back in order, then answer seven quick questions.',items:[
+  {t:'build',q:'A journal article with a DOI.',tiles:['Lindsay, S., Ahmed, H., Tomas, V., & Vijayakumar, A.','(2023).','Exploring the lived experiences of ethnic minority youth with disabilities: A systematic review and meta synthesis of qualitative data.','<i>Disability and Rehabilitation, 45</i>(4),','588–601.','https://doi.org/10.1080/09638288.2022.2040614'],ans:null,why:'Author. (Year). Article title. <i>Journal Name, volume</i>(issue), pages. DOI'},
+  {t:'build',q:'A webpage written by an organization.',tiles:['World Health Organization.','(2018, May 24).','<i>The top 10 causes of death</i>.','https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death'],ans:null,why:'Organization. (Date). <i>Title of webpage</i>. URL. The site name is left out because it is the same as the author.'},
+  {t:'build',q:'An UpToDate topic.',tiles:['Bordeaux, B.','(2023).','Benefits and risks of caffeine and caffeinated beverages.','<i>UpToDate</i>.','Retrieved April 16, 2024, from','https://www.uptodate.com/contents/benefits-and-risks-of-caffeine-and-caffeinated-beverages'],ans:null,why:'Author. (Year). Title of topic. <i>UpToDate</i>. Retrieved date, from URL'},
+  {t:'mcq',q:'Which article title is in sentence case?',opts:['Family trouble: Heteronormativity, emotion work and queer youth mental health','Family Trouble: Heteronormativity, Emotion Work and Queer Youth Mental Health','Family trouble: heteronormativity, emotion work and queer youth mental health'],a:0,why:'Capitalize the first word and the first word after the colon. Everything else is lowercase unless it is a proper noun.'},
+  {t:'mcq',q:'Which entry comes first in the reference list?',opts:['Bagheri, S. C. (2014).','Boutros, H. M. (2024).','Dillard, J. P. (2020).'],a:0,why:'Alphabetical by surname, letter by letter: Bag comes before Bou.'},
+  {t:'mcq',q:'What is a hanging indent?',opts:['The first line starts at the margin and the following lines are indented','The first line is indented and the following lines start at the margin','Every line of the entry is indented'],a:0,why:'It makes each author name stand out down the left edge so a reader can scan the list.'},
+  {t:'mcq',q:'Which shows two authors correctly in a reference list entry?',opts:['Hall, J. B., & Schmidt, G. A.','Hall, J. B., and Schmidt, G. A.','J. B. Hall & G. A. Schmidt'],a:0,why:'Surname first, then initials, with an ampersand before the last author.'},
+  {t:'mcq',q:'A citation generator gave you this APA reference. What needs fixing?<div class="apa"><div class="ref">Lindsay, S., Ahmed, H., Tomas, V., &amp; Vijayakumar, A. (2023). Exploring the Lived Experiences of Ethnic Minority Youth with Disabilities: A Systematic Review and Meta Synthesis of Qualitative Data. <i>Disability and Rehabilitation, 45</i>(4), 588–601. https://doi.org/10.1080/09638288.2022.2040614</div></div>',opts:['The article title should be in sentence case','The ampersand should be replaced with the word and','The journal name should be abbreviated'],a:0,why:'Generators often keep the Title Case of the published article. APA article titles are in sentence case.'},
+  {t:'mcq',q:'Which part of a journal article reference is in italics?',opts:['The journal name and volume number','The article title','The authors\' names'],a:0,why:'The journal name and volume are italic. The article title and issue number are not.'},
+  {t:'mcq',q:'An AI chatbot gives you a neatly formatted reference for an article you have not seen. What do you do before you cite it?',opts:['Find the article and check that it exists and says what you need','Cite it. Correct formatting shows it is a real source','Add a note after the reference saying it came from AI'],a:0,why:'Generative AI can invent references that look real. Only cite sources you have found and read.'}]}}
+];
+const FINAL={id:'final',n:'★',title:'Final rounds',desc:'Ten mixed questions. Score 9 or more to earn your certificate.',
+ game:{name:'Final rounds',intro:'Ten questions from all four modules. You need 9 out of 10 for the certificate, and you can try again as often as you like.',items:[
+  {t:'sort',q:'You paraphrase an UpToDate topic in your care plan assignment.',a:true,why:'A paraphrase of any source needs a citation, including point-of-care tools.'},
+  {t:'mcq',q:'Which narrative citation is correct for an article by Denman, Okafor and Liu?',opts:['Denman et al. (2018) found that…','Denman, Okafor, and Liu (2018) found that…','Denman and colleagues, 2018, found that…'],a:0,why:'Three or more authors: first surname and "et al." every time.'},
+  {t:'build',q:'You quote from page 18 of a 2024 book by Barter.',tiles:['(Barter,','2024,','p. 18)','pp. 18)','para. 18)'],ans:['(Barter,','2024,','p. 18)'],why:'One page takes "p."'},
+  {t:'mcq',q:'It is the first time you cite the World Health Organization and you want to use "WHO" afterwards.',opts:['(World Health Organization [WHO], 2018)','(WHO, 2018)','(World Health Organization (WHO), 2018)'],a:0,why:'In a parenthetical citation the abbreviation goes in square brackets the first time.'},
+  {t:'mcq',q:'Does a paraphrase need a page number?',opts:['No, but you may add one to help readers find the passage in a long work','Yes, always','No, and you are not allowed to add one'],a:0,why:'Page numbers are required for direct quotations and optional for paraphrases.'},
+  {t:'mcq',q:'What is wrong with this reference?<div class="apa"><div class="ref">World Health Organization. (2018, May 24). <i>The Top 10 Causes of Death</i>. https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death</div></div>',opts:['The webpage title should be in sentence case','The date should show only the year','The URL should end with a period'],a:0,why:'Webpage titles are italic and in sentence case: <i>The top 10 causes of death</i>.'},
+  {t:'build',q:'A webpage with an individual author, published on MedlinePlus.',tiles:['Heller, J. L.','(2019, July 2).','<i>Jellyfish stings</i>.','MedlinePlus.','https://medlineplus.gov/ency/article/002845.html'],ans:null,why:'Author. (Date). <i>Title of webpage</i>. Site Name. URL'},
+  {t:'mcq',q:'Why does an UpToDate reference include a retrieval date?',opts:['Topics change over time and earlier versions are not archived','Every online source needs a retrieval date','It replaces the year of publication'],a:0,why:'Most online sources do not need a retrieval date. Sources designed to change, such as UpToDate, do.'},
+  {t:'mcq',q:'You used ChatGPT to help summarize a topic, and your instructor allows it. How do you cite it in your text?',opts:['(OpenAI, 2024)','(ChatGPT, 2024)','No citation is needed for AI tools'],a:0,why:'The developer is the author. The reference entry names the model, version and URL.'},
+  {t:'mcq',q:'Where does the reference list go, and what is it called?',opts:['On a new page at the end, titled "References" in bold and centred','Right after your last paragraph, titled "Bibliography"','On a new page at the end, titled "Works Cited" in italics'],a:0,why:'APA calls it References. Bold, centred, on its own page.'}]}};
+[...M,FINAL].forEach(m=>m.game.items.forEach(it=>{if(it.t==='build'&&!it.ans)it.ans=it.tiles.slice()}));
+
+/* ---------- state ---------- */
+let S={done:{},final:null,name:'',course:'',locked:false};
+try{const r=JSON.parse(localStorage.getItem('apa-clinic')||'null');if(r&&r.done)S=Object.assign(S,r)}catch(e){}
+function save(){try{localStorage.setItem('apa-clinic',JSON.stringify(S))}catch(e){}}
+const app=document.getElementById('app');
+let V={name:'home'};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const need=m=>Math.ceil(m.game.items.length*.9);
+const passed=m=>m.id==='final'?!!(S.final&&S.final.best>=need(FINAL)):!!(S.done[m.id]&&S.done[m.id].score>=need(m));
+const isOpen=m=>m.id==='final'?passed(M[3]):m.n===1||passed(M[m.n-2]);
+function points(){let p=0;for(const k in S.done)p+=S.done[k].score*10;if(S.final)p+=S.final.best*10;return p}
+
+/* ---------- sound ---------- */
+const AU={ctx:null,on:false,timer:null,step:0,next:0};
+const CH=[[261.63,329.63,392,493.88],[220,261.63,329.63,392],[174.61,220,261.63,329.63],[196,246.94,293.66,349.23]],PAT=[0,2,1,3,2,1,3,2];
+function ac(){if(!AU.ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;AU.ctx=new C();AU.master=AU.ctx.createGain();AU.master.gain.value=.6;AU.master.connect(AU.ctx.destination)}if(AU.ctx.state==='suspended')AU.ctx.resume();return AU.ctx}
+function note(f,t,d,type,v){const c=AU.ctx,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AU.master);o.start(t);o.stop(t+d+.05)}
+function tick(){const c=AU.ctx;while(AU.next<c.currentTime+.25){const bar=Math.floor(AU.step/8)%4,s=AU.step%8,ch=CH[bar];if(s===0)note(ch[0]/2,AU.next,2,'sine',.11);if(s===4)note(ch[2]/2,AU.next,1,'sine',.07);note(ch[PAT[s]]*(s===7?2:1),AU.next,.55,'triangle',.045);AU.next+=.32;AU.step++}}
+function setSound(on){const b=document.getElementById('snd');clearInterval(AU.timer);if(on&&!ac())on=false;AU.on=on;if(on){AU.next=AU.ctx.currentTime+.05;AU.timer=setInterval(tick,60)}b.setAttribute('aria-pressed',on);b.textContent=on?'Sound on':'Sound off'}
+function sfx(k){if(!AU.on||!AU.ctx)return;const t=AU.ctx.currentTime;if(k==='good'){note(659.25,t,.15,'triangle',.2);note(987.77,t+.1,.3,'triangle',.2)}else if(k==='bad'){note(196,t,.22,'sawtooth',.07);note(155.56,t+.13,.3,'sawtooth',.07)}else if(k==='win'){[523.25,659.25,783.99,1046.5].forEach((f,i)=>note(f,t+i*.12,.45,'triangle',.2))}else note(520,t,.06,'sine',.1)}
+document.getElementById('snd').addEventListener('click',()=>setSound(!AU.on));
+
+/* ---------- confetti ---------- */
+function confetti(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const cv=document.getElementById('fx'),x=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;const cs=getComputedStyle(document.documentElement),cols=['--gold','--blue','--sky','--good'].map(v=>cs.getPropertyValue(v).trim());const ps=Array.from({length:90},()=>({x:cv.width/2+(Math.random()-.5)*200,y:cv.height*.35,vx:(Math.random()-.5)*12,vy:-Math.random()*12-3,s:5+Math.random()*6,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*6}));let n=0;(function f(){x.clearRect(0,0,cv.width,cv.height);ps.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.restore()});if(++n<130)requestAnimationFrame(f);else x.clearRect(0,0,cv.width,cv.height)})()}
+
+/* ---------- routing ---------- */
+function go(h){if(location.hash==='#'+h)route();else location.hash=h}
+function route(){const h=(location.hash||'#home').slice(1),m=h.match(/^module-(\d)$/);
+  if(m&&M[m[1]-1])V=isOpen(M[m[1]-1])?{name:'mod',m:M[m[1]-1],phase:'learn',i:0}:{name:'locked',m:M[m[1]-1]};
+  else if(h==='final')V=isOpen(FINAL)?{name:'mod',m:FINAL,phase:'intro'}:{name:'locked',m:FINAL};
+  else if(h==='certificate')V={name:'cert'};
+  else V={name:'home'};
+  render();window.scrollTo(0,0)}
+window.addEventListener('hashchange',route);
+
+/* ---------- views ---------- */
+function render(){document.getElementById('pts').textContent=points()+' points';
+  if(V.name==='home')return home();if(V.name==='cert')return cert();if(V.name==='locked')return locked();
+  if(V.phase==='learn')return lesson();if(V.phase==='intro')return intro();
+  if(V.phase==='play')return play();return result()}
+
+function home(){const nx=M.find(m=>!passed(m)),allp=!nx;
+  const row=(m,href)=>{const fin=m.id==='final',d=fin?(S.final&&{score:S.final.best,total:10}):S.done[m.id],op=isOpen(m),ps=passed(m);
+   const st=ps?'Passed · '+d.score+'/'+d.total:!op?'Locked':d?'Best '+d.score+'/'+d.total+' · need '+need(m):'Not started';
+   const inner=`<span class="num">${m.n}</span><span><h3>${m.title}</h3><span class="desc">${m.desc}${fin?'':' About '+m.mins+' min.'}</span></span><span class="status ${ps?'done':''}">${st}</span>`;
+   return op?`<li><a class="it ${fin?'final':''}" href="${href}">${inner}</a></li>`:`<li><div class="it locked ${fin?'final':''}" aria-disabled="true">${inner}</div></li>`};
+  app.innerHTML=`<section class="hero">
+   <span class="eyebrow">APA 7th edition · for health sciences students</span>
+   <h1>Learn to cite in APA, <em>one short round at a time.</em></h1>
+   <p>Four short modules with a game at the end of each. Score 9 out of 10 in a game to unlock the next module. Then pass the final rounds, collect your certificate and upload it to UM Learn. About 30 minutes in total, and you can stop and come back.</p>
+   <div class="rx">A citation lets your reader check the evidence. In health care, that is how a claim earns trust (Author, year).</div>
+   <div class="row"><a class="btn" href="${allp?(passed(FINAL)?'#certificate':'#final'):'#module-'+nx.n}">${allp?(passed(FINAL)?'Get your certificate':'Take the final rounds'):nx.n===1&&!S.done.m1?'Start module 1':'Continue with module '+nx.n}</a>
+   <button class="btn ghost" type="button" data-act="sound">${AU.on?'Turn sound off':'Play with music and sound'}</button></div>
+  </section>
+  <ol class="mods">${M.map(m=>row(m,'#module-'+m.n)).join('')}${row(FINAL,'#final')}</ol>
+  ${passed(FINAL)?'<div class="row"><a class="btn" href="#certificate">Your certificate</a></div>':''}`}
+
+function locked(){const m=V.m,prev=m.id==='final'?M[3]:M[m.n-2];
+  app.innerHTML=`<article class="card"><span class="eyebrow">${m.id==='final'?m.title:'Module '+m.n+': '+m.title}</span><h2 tabindex="-1" id="vh">Not unlocked yet</h2><p>Score ${need(prev)} out of ${prev.game.items.length} in the module ${prev.n} game, "${prev.game.name}", to open this one.</p></article>
+  <div class="row"><a class="btn" href="#module-${prev.n}">Go to module ${prev.n}</a><a class="btn ghost" href="#home">All modules</a></div>`;focusH()}
+
+function lesson(){const m=V.m,s=m.slides[V.i],last=V.i===m.slides.length-1;
+  app.innerHTML=`<div class="crumb"><span class="eyebrow"><a href="#home">All modules</a> · Module ${m.n}: ${m.title}</span><span class="dots" role="img" aria-label="Step ${V.i+1} of ${m.slides.length}">${m.slides.map((_,k)=>`<i class="${k<=V.i?'on':''}"></i>`).join('')}</span></div>
+  <article class="card"><h2 tabindex="-1" id="vh">${s.h}</h2>${s.b}
+  ${last&&m.watch?`<a class="watch" href="${m.watch.url}" target="_blank" rel="noopener"><span class="play"></span><span><b>Watch: ${m.watch.title}</b><small>${m.watch.by} · about 2 minutes · opens in a new tab</small></span></a>`:''}</article>
+  <div class="row">${V.i>0?'<button class="btn ghost" type="button" data-act="prev">Back</button>':''}<button class="btn" type="button" data-act="next">${last?'Play: '+m.game.name:'Next'}</button></div>`;
+  focusH()}
+
+function intro(){const g=V.m.game,R=rightOf(V.m),rt=R.length>0&&R.length<need(V.m);
+  app.innerHTML=`<div class="crumb"><span class="eyebrow"><a href="#home">All modules</a> · ${V.m.title}</span></div>
+  <article class="card"><h2 tabindex="-1" id="vh">${g.name}</h2><p>${g.intro}</p>${rt?`<p><b>You have ${R.length} of ${g.items.length} right so far.</b> This round asks only the ${g.items.length-R.length} still to get.</p>`:''}</article>
+  <div class="row"><button class="btn" type="button" data-act="start">${rt?'Start the retry round':'Start'}</button></div>`;focusH()}
+
+function rightOf(m){S.right=S.right||{};return S.right[m.id]||(S.right[m.id]=[])}
+function startGame(){const m=V.m,all=m.game.items.map((_,k)=>k);let R=rightOf(m);const retry=R.length>0&&R.length<need(m);
+  if(!retry){R.length=0;save()}
+  V.phase='play';V.g={i:0,score:0,log:[],retry,q:retry?all.filter(k=>!R.includes(k)):all};setItem();render()}
+function setItem(){const it=V.m.game.items[V.g.q[V.g.i]];V.g.done=false;V.g.ok=false;V.g.pick=[];V.g.choice=null;
+  V.g.ord=it.t==='mcq'?shuffle(it.opts.map((_,k)=>k)):it.t==='build'?shuffle(it.tiles.map((_,k)=>k)):[]}
+
+function play(){const g=V.g,items=g.q.map(k=>V.m.game.items[k]),it=items[g.i];let body='';
+  if(it.t==='sort'){body=`<div class="opts two">${[true,false].map(v=>{let c='',tag='';if(g.done&&g.choice===v){c=g.ok?'right':'wrong';tag='<span class="tag">'+(g.ok?'Correct':'Your answer')+'</span>'}return `<button class="opt ${c}" type="button" data-act="sort" data-v="${v}" ${g.done?'disabled':''}>${v?'Cite it':'No citation needed'} ${tag}</button>`}).join('')}</div>`}
+  else if(it.t==='mcq'){body=`<div class="opts">${g.ord.map(k=>{let c='',tag='';if(g.done&&g.choice===k){c=g.ok?'right':'wrong';tag='<span class="tag">'+(g.ok?'Correct':'Your answer')+'</span>'}return `<button class="opt ${c}" type="button" data-act="mcq" data-v="${k}" ${g.done?'disabled':''}><span>${esc(it.opts[k])}</span>${tag}</button>`}).join('')}</div>`}
+  else{const rest=g.ord.filter(k=>!g.pick.includes(k));
+   body=`<span class="eyebrow">Your answer</span><div class="line ${g.done?(g.ok?'right':'wrong'):''}" aria-live="polite">${g.pick.length?g.pick.map(k=>`<button class="tile" type="button" data-act="unpick" data-v="${k}" ${g.done?'disabled':''} aria-label="Remove piece">${it.tiles[k]}</button>`).join(''):'<span class="muted">Tap the pieces below in order.</span>'}</div>
+   ${g.done?'':`<span class="eyebrow">Pieces</span><div class="pool">${rest.map(k=>`<button class="tile" type="button" data-act="pick" data-v="${k}">${it.tiles[k]}</button>`).join('')}</div>
+   <div class="row"><button class="btn" type="button" data-act="check" ${g.pick.length?'':'disabled'}>Check</button><button class="btn ghost" type="button" data-act="clear" ${g.pick.length?'':'disabled'}>Clear</button></div>`}`}
+  const fb=g.done?`<div class="fb ${g.ok?'':'no'}" role="status"><b>${g.ok?'Correct.':'Not quite.'}</b><span>${g.ok?it.why:'The answer stays hidden for now. This question will come back in a retry round, so review the lesson if you are not sure.'}</span></div>
+   <div class="row"><button class="btn" type="button" data-act="adv" id="adv">${g.i===items.length-1?'See your result':'Next'}</button></div>`:'';
+  app.innerHTML=`<div class="crumb"><span class="eyebrow"><a href="#home">All modules</a> · ${V.m.game.name}</span><span class="meter" role="img" aria-label="Question ${g.i+1} of ${items.length}">${items.map((_,k)=>`<i class="${k<g.log.length?(g.log[k]?'y':'n'):k===g.i?'c':''}"></i>`).join('')}</span></div>
+  <article class="card"><span class="eyebrow">${g.retry?'Retry round · missed question ':'Question '}${g.i+1} of ${items.length}</span><div class="q" id="vh" tabindex="-1">${it.q}</div>${body}${fb}</article>`;
+  if(g.done){const a=document.getElementById('adv');if(a)a.focus({preventScroll:true})}}
+
+function answer(ok){const g=V.g;g.done=true;g.ok=ok;g.log.push(ok);if(ok){const R=rightOf(V.m);if(!R.includes(g.q[g.i]))R.push(g.q[g.i]);save()}sfx(ok?'good':'bad');render()}
+
+function finish(){const g=V.g,m=V.m,total=m.game.items.length;V.phase='result';g.score=rightOf(m).length;
+  if(m.id==='final'){const best=Math.max(g.score,S.final?S.final.best:0);S.final={best,date:(S.final&&S.final.date)||(best>=need(m)?new Date().toISOString():null)}}
+  else{const prev=S.done[m.id];S.done[m.id]={score:Math.max(g.score,prev?prev.score:0),total}}
+  save();render();if(g.score>=need(m)){sfx('win');confetti()}}
+
+function result(){const g=V.g,m=V.m,total=m.game.items.length,fin=m.id==='final',pass=g.score>=need(m),was=passed(m);
+  const nxt=!(pass||was)?'':!fin&&m.n<4?`<a class="btn" href="#module-${m.n+1}">Go to module ${m.n+1}</a>`:!fin?'<a class="btn" href="#final">Take the final rounds</a>':'<a class="btn" href="#certificate">Get your certificate</a>';
+  const what=fin?'earn the certificate':m.n<4?'unlock module '+(m.n+1):'unlock the final rounds';
+  app.innerHTML=`<article class="card"><span class="eyebrow">${m.game.name}</span><div class="big">${g.score}/${total}</div>
+   <h2 tabindex="-1" id="vh">${pass?'Clean bill of health.':'So close. A follow-up visit is needed.'}</h2>
+   <p>${pass?(fin?'You have shown you can cite and reference in APA style.':'You passed. '+(m.n<4?'Module '+(m.n+1)+' is now open.':'The final rounds are now open.')):'You need '+need(m)+' out of '+total+' to '+what+'. You only need to redo the '+(total-g.score)+' you missed. The ones you got right are saved.'+(was?' Your earlier pass still counts.':'')}</p></article>
+  <div class="row">${nxt}<button class="btn ${pass?'ghost':''}" type="button" data-act="start">${pass?'Play again from the start':'Retry the '+(total-g.score)+' you missed'}</button>${fin?'':`<button class="btn ghost" type="button" data-act="relearn">Review the lesson</button>`}<a class="btn ghost" href="#home">All modules</a></div>`;focusH()}
+
+const KEY='9228f30e47257e32c1d5a0cd';
+function cyrb53(str){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)}
+function codeFor(tut,name,ymd,score){const n=cyrb53([tut,name.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' '),ymd,score,KEY].join('|'))%1e8,t=String(n).padStart(8,'0');return t.slice(0,4)+'-'+t.slice(4)}
+const TUT='APA';
+function certCode(){if(!S.locked||!passed(FINAL))return '';const c=certInfo(),d=c.d,p=n=>String(n).padStart(2,'0');return codeFor(TUT,c.nm,d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()),S.final.best)}
+function certInfo(){const d=new Date(S.final.date||Date.now());return{d,ds:d.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'}),nm:(S.name||'').trim(),co:(S.course||'').trim()}}
+function cert(){if(!passed(FINAL)){app.innerHTML=`<article class="card"><h2 tabindex="-1" id="vh">Your certificate is waiting</h2><p>Score 9 or more out of 10 in the final rounds to unlock it.</p></article><div class="row"><a class="btn ghost" href="#home">All modules</a></div>`;return}
+  const c=certInfo(),sur=c.nm?c.nm.split(/\s+/).pop():'Surname';
+  app.innerHTML=`<section class="hero"><span class="eyebrow">Last step</span><h1 tabindex="-1" id="vh" style="font-size:clamp(30px,6vw,44px)">Your certificate</h1><p>Add your details, save your certificate, then upload it to UM Learn.</p></section>
+  <article class="card"><h3><span class="step">1</span>Your details</h3>
+   <div class="fields"><label for="cert-name">Full name<input type="text" id="cert-name" maxlength="60" autocomplete="name" value="${esc(S.name)}" placeholder="Type your name" ${S.locked?'disabled':''}></label>
+   <label for="cert-course">Course or program (optional)<input type="text" id="cert-course" maxlength="60" value="${esc(S.course||'')}" placeholder="For example, NURS 1500"></label></div>
+   ${S.locked?'<p><b>Name confirmed.</b> Your verification code is on the certificate below.</p>':'<p>Check the spelling. Your name is built into the verification code and cannot be changed after you confirm it.</p><div class="row"><button class="btn" type="button" data-act="lock">Confirm my name</button><span id="lock-msg" role="status" class="muted"></span></div>'}</article>
+  <section class="cert"><span class="eyebrow">University of Manitoba Libraries · Health Sciences</span><h2>Certificate of completion</h2><p>This certifies that</p>
+   <div class="who" id="cert-who">${c.nm?esc(c.nm):'Your name'}</div>
+   <p>completed all final rounds of the <b>APA Citation Clinic</b><br>with a score of <b>${S.final.best} out of 10</b> on ${c.ds}.</p>
+   <p id="cert-co">${esc(c.co)}</p>
+   <p class="code" id="cert-code">${S.locked?'Verification code: '+certCode():'Your verification code appears after you confirm your name.'}</p>
+   <p class="apa-line" id="cert-apa">(${esc(sur)}, ${c.d.getFullYear()})</p></section>
+  <article class="card"><h3><span class="step">2</span>Save your certificate</h3>
+   <p>Download it as an image. If the download is not available in your browser, take a screenshot of the certificate above and upload that.</p>
+   <div class="row"><button class="btn" type="button" data-act="dl" id="dl">Download certificate</button><span id="dl-msg" role="status" class="muted"></span></div></article>
+  <article class="card"><h3><span class="step">3</span>Upload it to UM Learn</h3>
+   <p>Open your course in UM Learn and find the submission folder your instructor set up for this tutorial. It is usually under Assessments, then Assignments.</p>
+   <p>Upload the certificate image you saved in step 2, then submit. Check that your name and verification code are easy to read.</p>
+   <p class="muted">Nothing is sent from this page. Your certificate only reaches your instructor when you upload it yourself.</p></article>
+  <div class="row"><a class="btn ghost" href="#home">All modules</a></div>`;
+  const up=()=>{if(!S.locked)S.name=document.getElementById('cert-name').value;S.course=document.getElementById('cert-course').value;save();const k=certInfo();
+   document.getElementById('cert-who').textContent=k.nm||'Your name';document.getElementById('cert-co').textContent=k.co;
+   document.getElementById('cert-apa').textContent='('+(k.nm?k.nm.split(/\s+/).pop():'Surname')+', '+k.d.getFullYear()+')';
+   };
+  document.getElementById('cert-name').addEventListener('input',up);document.getElementById('cert-course').addEventListener('input',up)}
+
+function certCanvas(){const c=certInfo(),cv=document.createElement('canvas');cv.width=1600;cv.height=1100;const x=cv.getContext('2d'),D='"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif',B='"Source Sans 3","Segoe UI",Arial,sans-serif';
+  x.fillStyle='#ffffff';x.fillRect(0,0,1600,1100);x.strokeStyle='#385e9d';x.lineWidth=14;x.strokeRect(27,27,1546,1046);x.strokeStyle='#00a3e0';x.lineWidth=4;x.strokeRect(52,52,1496,996);
+  x.textAlign='center';x.fillStyle='#536379';x.font='600 26px '+B;x.fillText('UNIVERSITY OF MANITOBA LIBRARIES · HEALTH SCIENCES',800,180);
+  x.fillStyle='#14233b';x.font='800 78px '+D;x.fillText('Certificate of completion',800,300);x.font='400 34px '+B;x.fillText('This certifies that',800,400);
+  const nm=c.nm||'Name not provided';let fs=88;do{x.font='800 '+fs+'px '+D;fs-=4}while(x.measureText(nm).width>1300&&fs>30);x.fillText(nm,800,525);
+  x.strokeStyle='#00a3e0';x.lineWidth=4;x.beginPath();x.moveTo(350,560);x.lineTo(1250,560);x.stroke();
+  x.font='400 34px '+B;x.fillText('completed all final rounds of the APA Citation Clinic',800,650);x.fillText('with a score of '+S.final.best+' out of 10 on '+c.ds+'.',800,702);
+  if(c.co){x.font='600 30px '+B;x.fillText(c.co.slice(0,60),800,780)}
+  x.font='700 32px '+B;x.fillText('Verification code: '+certCode(),800,860);x.fillStyle='#536379';x.font='italic 26px "Source Serif 4","Times New Roman",serif';x.fillText('('+(c.nm?c.nm.split(/\s+/).pop():'Surname')+', '+c.d.getFullYear()+')',800,930);return cv}
+async function dlCert(btn){const out=document.getElementById('dl-msg');if(!S.locked){out.textContent='Confirm your name in step 1 first.';return}
+  btn.disabled=true;out.textContent='Preparing your certificate…';
+  try{if(document.fonts&&document.fonts.ready)await document.fonts.ready;const blob=await new Promise(r=>certCanvas().toBlob(r,'image/png'));if(!blob)throw new Error('no image');const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='APA-Citation-Clinic-certificate.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);out.textContent='Downloaded. Look in your Downloads folder, then upload it to UM Learn in step 3.'}
+  catch(e){out.textContent=e&&e.code==='declined'?'Download cancelled.':e&&e.code==='rate_limited'?'A download prompt is already open. Try again in a moment.':'Download is not available here. Take a screenshot of the certificate instead.'}
+  finally{btn.disabled=false}}
+function copyText(btn){const el=document.getElementById(btn.dataset.t),text=el.value!==undefined?el.value:el.textContent,o=btn.dataset.o||(btn.dataset.o=btn.textContent);
+  const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent=o,1500)};
+  const fb=()=>{if(el.select)el.select();else{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}btn.textContent='Selected. Now press Ctrl+C or Cmd+C'};
+  try{navigator.clipboard.writeText(text).then(ok,fb)}catch(e){fb()}}
+
+function focusH(){const h=document.getElementById('vh');if(h)h.focus({preventScroll:true})}
+
+app.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,g=V.g,it=g&&V.m.game.items[g.q[g.i]];
+  if(a==='sound'){setSound(!AU.on);render();return}
+  if(a==='lock'){if(!(S.name||'').trim()){document.getElementById('lock-msg').textContent='Type your full name first.';document.getElementById('cert-name').focus();return}S.name=S.name.trim();S.locked=true;save();sfx('good');render();return}
+  if(a==='dl'){dlCert(b);return}
+  if(a==='copy'){copyText(b);return}
+  if(a==='next'){sfx('tap');if(V.i<V.m.slides.length-1){V.i++;render();window.scrollTo(0,0)}else{V.phase='intro';render();window.scrollTo(0,0)}}
+  else if(a==='prev'){V.i--;render();window.scrollTo(0,0)}
+  else if(a==='relearn'){V.phase='learn';V.i=0;render();window.scrollTo(0,0)}
+  else if(a==='start'){sfx('tap');startGame();window.scrollTo(0,0)}
+  else if(a==='sort'){g.choice=b.dataset.v==='true';answer(g.choice===it.a)}
+  else if(a==='mcq'){g.choice=+b.dataset.v;answer(g.choice===it.a)}
+  else if(a==='pick'){sfx('tap');g.pick.push(+b.dataset.v);render()}
+  else if(a==='unpick'){g.pick=g.pick.filter(k=>k!==+b.dataset.v);render()}
+  else if(a==='clear'){g.pick=[];render()}
+  else if(a==='check'){answer(g.pick.map(k=>it.tiles[k]).join('|')===it.ans.join('|'))}
+  else if(a==='adv'){if(g.i<g.q.length-1){g.i++;setItem();render();window.scrollTo(0,0);focusH()}else{finish();window.scrollTo(0,0)}}
+});
+route();
+</script>
+</body>
+</html>
